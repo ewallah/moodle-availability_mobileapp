@@ -15,17 +15,33 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language strings.
+ * Privacy main class.
  *
  * @package availability_mobileapp
  * @copyright Juan Leyva <juan@moodle.com>
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['description'] = 'Require students to access (or not access) using the Mobile app.';
-$string['label_access'] = 'Type of access:';
-$string['pluginname'] = 'Restriction by Mobile app access';
-$string['privacy:metadata'] = 'The Restriction by mobile app plugin does not store any personal data.';
-$string['requires_app'] = 'Access using the Mobile app';
-$string['requires_notapp'] = 'Access NOT using the Mobile app';
-$string['title'] = 'Mobile app';
+namespace availability_mobileapp\privacy;
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * Privacy main class.
+ *
+ * @package availability_mobileapp
+ * @copyright Juan Leyva <juan@moodle.com>
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class provider implements \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}
