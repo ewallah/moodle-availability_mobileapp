@@ -1,4 +1,4 @@
-@availability @availability_mobileapp
+@availability @availability_mobileapp @javascript
 Feature: availability_mobileapp
   In order to control student access to activities
   As a teacher
@@ -16,14 +16,10 @@ Feature: availability_mobileapp
       | user     | course | role           |
       | teacher1 | C1     | editingteacher |
       | student1 | C1     | student        |
-    And I log in as "admin"
-    And I set the following administration settings values:
-      | Enable conditional access  | 1 |
-      | Enable web services                    | 1 |
-    And I navigate to "Mobile" node in "Site administration > Plugins > Web services"
-    And I click on "Enable web services for mobile devices" "checkbox"
-    And I click on "Save changes" "button"
-    And I log out
+    And the following config values are set as admin:
+      | enableavailability     | 1 |
+      | enablewebservices      | 1 |
+      | enablemobilewebservice | 1 |
 
   @javascript
   Scenario: Test condition
