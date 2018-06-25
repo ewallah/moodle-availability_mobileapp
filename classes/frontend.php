@@ -40,22 +40,10 @@ class frontend extends \core_availability\frontend {
     }
 
     protected function allow_add($course, \cm_info $cm = null, \section_info $section = null) {
-        global $CFG, $DB;
-
-        // Check if Web Services are enabled.
-        if (!$CFG->enablewebservices) {
+        global $CFG;
+        if (!$CFG->enablemobilewebservice) {
             return false;
         }
-
-        // Check if Mobile services are enabled.
-        $mobileservice = $DB->get_record('external_services', array('shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE, 'enabled' => 1));
-        // Rare case, the official service is disabled but the local_mobile services are enabled.
-        $extraservice = $DB->get_record('external_services', array('shortname' => 'local_mobile', 'enabled' => 1));
-
-        if (!$mobileservice and !$extraservice) {
-            return false;
-        }
-
         return true;
     }
 }
