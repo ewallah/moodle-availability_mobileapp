@@ -35,8 +35,9 @@ Feature: availability_mobileapp
       | Page content | Test   |
     And I expand all fieldsets
     And I click on "Add restriction..." "button"
-    And I click on "Mobile app" "button"
+    And I click on "Mobile app" "button" in the "Add restriction..." "dialogue"
     And I set the field "Mobile app" to "Access using the Mobile app"
+    And I click on ".availability-item .availability-eye img" "css_element"
     And I click on "Save and return to course" "button"
 
     # Add a Page with a date condition that does match.
@@ -46,9 +47,9 @@ Feature: availability_mobileapp
       | Description  | Test   |
       | Page content | Test   |
     And I expand all fieldsets
-    And I click on "Add restriction..." "button"
-    And I click on "Mobile app" "button"
+    And I click on "Add restriction..." "button" in the "Add restriction..." "dialogue"
     And I set the field "Mobile app" to "Access NOT using the Mobile app"
+    And I click on ".availability-item .availability-eye img" "css_element"
     And I click on "Save and return to course" "button"
 
     # Log back in as student.
