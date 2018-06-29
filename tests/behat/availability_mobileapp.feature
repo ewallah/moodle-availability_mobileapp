@@ -36,7 +36,6 @@ Feature: availability_mobileapp
     And I expand all fieldsets
     And I click on "Add restriction..." "button"
     And I click on "Mobile app" "button"
-    And I click on ".availability-item .availability-eye img" "css_element"
     And I set the field "Mobile app" to "Access using the Mobile app"
     And I click on "Save and return to course" "button"
 
@@ -49,7 +48,6 @@ Feature: availability_mobileapp
     And I expand all fieldsets
     And I click on "Add restriction..." "button"
     And I click on "Mobile app" "button"
-    And I click on ".availability-item .availability-eye img" "css_element"
     And I set the field "Mobile app" to "Access NOT using the Mobile app"
     And I click on "Save and return to course" "button"
 
