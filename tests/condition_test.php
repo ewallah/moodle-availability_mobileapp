@@ -26,8 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 use availability_mobileapp\condition;
 
-global $CFG;
-
 /**
  * Unit tests for the Mobile app condition.
  *
@@ -35,13 +33,13 @@ global $CFG;
  * @copyright availability_mobileapp
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class availability_mobileapp_condition_testcase extends advanced_testcase {
+class availability_mobileapp_testcase extends advanced_testcase {
     /**
      * Load required classes.
      */
-    public function setUp() {
+    public function setUp():void {
         // Load the mock info class so that it can be used.
-        global $CFG, $DB;
+        global $CFG;
         require_once($CFG->dirroot . '/availability/tests/fixtures/mock_info.php');
     }
 
@@ -49,22 +47,22 @@ class availability_mobileapp_condition_testcase extends advanced_testcase {
      * Tests constructing and using condition as part of tree.
      */
     public function test_in_tree() {
-        global $USER, $CFG;
+        global $USER;
         $this->resetAfterTest();
         $this->setAdminUser();
 
         $generator = $this->getDataGenerator();
         $course = $generator->create_course();
-        $page = $generator->get_plugin_generator('mod_page')->create_instance(
-                array('course' => $course->id));
+        $page = $generator->get_plugin_generator('mod_page')->create_instance(['course' => $course->id]);
 
         $modinfo = get_fast_modinfo($course);
         $cm = $modinfo->get_cm($page->cmid);
         $info = new \core_availability\mock_info($course, $USER->id);
 
-        $structure = (object)array('op' => '|', 'show' => true, 'c' => array(
-                (object)array('type' => 'mobileapp', 'cm' => (int)$cm->id,
-                'e' => condition::NOT_MOBILE_APP)));
+        $structure = (object)[
+            'op' => '|',
+            'show' => true,
+            'c' => [(object)['type' => 'mobileapp', 'cm' => $cm->id, 'e' => condition::NOT_MOBILE_APP]]];
         $tree = new \core_availability\tree($structure);
 
         // Check it's true.
@@ -72,9 +70,10 @@ class availability_mobileapp_condition_testcase extends advanced_testcase {
         $this->assertTrue($result->is_available());
 
         // We cannot mock the WS_SERVER, so we need to create a new condion tree.
-        $structure = (object)array('op' => '|', 'show' => true, 'c' => array(
-                (object)array('type' => 'mobileapp', 'cm' => (int)$cm->id,
-                'e' => condition::MOBILE_APP)));
+        $structure = (object)[
+            'op' => '|',
+            'show' => true,
+            'c' => [(object)['type' => 'mobileapp', 'cm' => $cm->id, 'e' => condition::MOBILE_APP]]];
         $tree = new \core_availability\tree($structure);
 
         // Check it's false.
@@ -96,7 +95,7 @@ class availability_mobileapp_condition_testcase extends advanced_testcase {
             $cond = new condition($structure);
             $this->fail();
         } catch (coding_exception $e) {
-            $this->assertContains('Missing or invalid ->e', $e->getMessage());
+            $this->assertStringContainsString('Missing or invalid ->e', $e->getMessage());
         }
 
         // Successful construct & display with all different expected values.
@@ -113,7 +112,7 @@ class availability_mobileapp_condition_testcase extends advanced_testcase {
      * Tests the save() function.
      */
     public function test_save() {
-        $structure = (object)array('e' => condition::MOBILE_APP);
+        $structure = (object)['e' => condition::MOBILE_APP];
         $cond = new condition($structure);
         $structure->type = 'mobileapp';
         $this->assertEquals($structure, $cond->save());
@@ -130,11 +129,20 @@ class availability_mobileapp_condition_testcase extends advanced_testcase {
         $course = $generator->create_course();
         $info = new \core_availability\mock_info($course, $USER->id);
 
-        $mobileapp = new condition((object)array('e' => condition::MOBILE_APP));
+        $mobileapp = new condition((object)['e' => condition::MOBILE_APP]);
         $this->assertFalse($mobileapp->is_available(false, $info, true, $USER->id));
 
-        $mobileapp = new condition((object)array('e' => condition::NOT_MOBILE_APP));
+        $mobileapp = new condition((object)['e' => condition::NOT_MOBILE_APP]);
         $this->assertTrue($mobileapp->is_available(false, $info, true, $USER->id));
-
+    }
+    
+    /**
+     * Test returning metadata.
+     */
+    public function test_get_metadata() {
+        $collection = new \core_privacy\local\metadata\collection('availability_mobileapp');
+        $reason = \availability_mobileapp\privacy\provider::get_reason($collection);
+        $this->assertEquals($reason, 'privacy:metadata');
+        $this->assertStringContainsString('does not store', get_string($reason, 'availability_mobileapp'));
     }
 }
