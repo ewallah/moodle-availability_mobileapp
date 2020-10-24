@@ -135,7 +135,7 @@ class availability_mobileapp_testcase extends advanced_testcase {
         $mobileapp = new condition((object)['e' => condition::NOT_MOBILE_APP]);
         $this->assertTrue($mobileapp->is_available(false, $info, true, $USER->id));
     }
-    
+
     /**
      * Test returning metadata.
      */
