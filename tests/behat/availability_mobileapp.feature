@@ -20,7 +20,7 @@ Feature: availability_mobileapp
       | enableavailability     | 1 |
       | enablewebservices      | 1 |
       | enablemobilewebservice | 1 |
-    
+
   Scenario: The mobile availbility should be available
     Given I log in as "admin"
     And I am on homepage
