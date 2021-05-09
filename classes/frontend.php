@@ -35,10 +35,22 @@ defined('MOODLE_INTERNAL') || die();
  */
 class frontend extends \core_availability\frontend {
 
+    /**
+     * Gets a list of string identifiers that are required in JavaScript for this plugin.
+     *
+     * @return array Array of required string identifiers
+     */
     protected function get_javascript_strings() {
         return array('requires_app', 'requires_notapp', 'label_access');
     }
 
+    /**
+     * Decides whether this plugin should be available in a given course.
+     *
+     * @param \stdClass $course Course object
+     * @param \cm_info $cm Course-module currently being edited (null if none)
+     * @param \section_info $section Section currently being edited (null if none)
+     */
     protected function allow_add($course, \cm_info $cm = null, \section_info $section = null) {
         global $CFG, $DB;
 

@@ -60,6 +60,11 @@ class condition extends \core_availability\condition {
         }
     }
 
+    /**
+     * Saves tree data back to a structure object.
+     *
+     * @return stdClass Structure object
+     */
     public function save() {
         return (object)array('type' => 'mobileapp', 'e' => $this->accesstype);
     }
@@ -77,6 +82,12 @@ class condition extends \core_availability\condition {
         return (object)array('type' => 'mobileapp', 'e' => (int)$accesstype);
     }
 
+
+    /**
+     * Obtains a representation of the options of this condition as a string, for debugging.
+     *
+     * @return string Text representation of parameters
+     */
     protected function get_debug_string() {
         return '#' . $this->accesstype;
     }
@@ -104,6 +115,15 @@ class condition extends \core_availability\condition {
         return false;
     }
 
+    /**
+     * Determines whether a particular item is currently available according to this availability condition.
+     *
+     * @param bool $not Set true if we are inverting the condition
+     * @param info $info Item we're checking
+     * @param bool $grabthelot Performance hint: if true, caches information
+     * @param int $userid User ID to check availability for
+     * @return bool True if available
+     */
     public function is_available($not, \core_availability\info $info, $grabthelot, $userid) {
 
         $allow = false;
@@ -124,6 +144,14 @@ class condition extends \core_availability\condition {
         return $allow;
     }
 
+    /**
+     * Obtains a string describing this restriction (whether or not it actually applies).
+     *
+     * @param bool $full Set true if this is the 'full information' view
+     * @param bool $not Set true if we are inverting the condition
+     * @param info $info Item we're checking
+     * @return string Information string (for admin) about all restrictions on this item
+     */
     public function get_description($full, $not, \core_availability\info $info) {
 
         if ($this->accesstype == self::MOBILE_APP) {
