@@ -22,6 +22,8 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace availability_mobileapp;
+
 defined('MOODLE_INTERNAL') || die();
 
 use availability_mobileapp\condition;
@@ -33,7 +35,7 @@ use availability_mobileapp\condition;
  * @copyright availability_mobileapp
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class availability_mobileapp_testcase extends advanced_testcase {
+class condition_test extends \advanced_testcase {
     /**
      * Load required classes.
      */
@@ -88,15 +90,7 @@ class availability_mobileapp_testcase extends advanced_testcase {
      */
     public function test_constructor() {
         // No parameters.
-        $structure = new stdClass();
-
-        // Invalid $e.
-        try {
-            $cond = new condition($structure);
-            $this->fail();
-        } catch (coding_exception $e) {
-            $this->assertStringContainsString('Missing or invalid ->e', $e->getMessage());
-        }
+        $structure = new \stdClass();
 
         // Successful construct & display with all different expected values.
         $structure->e = condition::NOT_MOBILE_APP;
@@ -106,6 +100,11 @@ class availability_mobileapp_testcase extends advanced_testcase {
         $structure->e = condition::MOBILE_APP;
         $cond = new condition($structure);
         $this->assertEquals('{mobileapp:#1}', (string)$cond);
+
+        // Invalid $e.
+        $structure = new \stdClass();
+        $this->expectExceptionMessage('Missing or invalid ->e for access condition');
+        new condition($structure);
     }
 
     /**

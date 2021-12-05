@@ -43,6 +43,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: mbstring, pgsql, mysqli, gd, zip
+          coverage: xdebug
 
       - name: composer
         run: |
@@ -58,45 +59,60 @@ jobs:
           MOODLE_BRANCH: ${{ matrix.moodle-branch }}
 
       - name: phplint
+        if: ${{ always() }}
         run: moodle-plugin-ci --ansi phplint
 
       - name: phpcpd
+        if: ${{ always() }}
         run: moodle-plugin-ci --ansi phpcpd
 
       - name: phpmd
+        if: ${{ always() }}
         run: moodle-plugin-ci --ansi phpmd
 
       - name: phpdoc
+        if: ${{ always() }}
         run: moodle-plugin-ci --ansi phpdoc
 
       - name: codechecker
+        if: ${{ always() }}
         run: moodle-plugin-ci --ansi codechecker
 
       - name: validate
+        if: ${{ always() }}
         run: moodle-plugin-ci --ansi validate
 
       - name: savepoints
+        if: ${{ always() }}
         run: moodle-plugin-ci --ansi savepoints
 
-      - name: mustache
-        run: moodle-plugin-ci --ansi mustache
-
       - name: grunt
+        if: ${{ always() }}
         run: moodle-plugin-ci --ansi grunt
 
-      - name: phpunit 
-        run: moodle-plugin-ci --ansi phpunit --coverage-text --coverage-clover
+      - name: mustache
+        if: ${{ always() }}
+        run: moodle-plugin-ci --ansi mustache
+
+      - name: phpunit
+        continue-on-error: true
+        if: ${{ always() }}
+        run: moodle-plugin-ci --ansi phpunit --coverage-text
 
       - name: firefox
+        if: ${{ always() }}
         run: moodle-plugin-ci --ansi behat
       
       - name: chrome
+        if: ${{ always() }}
         run: moodle-plugin-ci --ansi behat --profile chrome
 
       - name: firefox classic
+        if: ${{ always() }}
         run: moodle-plugin-ci --ansi behat --suite="classic"
       
       - name: chrome classic
+        if: ${{ always() }}
         run: moodle-plugin-ci --ansi behat --suite="classic" --profile chrome
 
       - name: admin bookmarks
