@@ -134,15 +134,4 @@ class condition_test extends \advanced_testcase {
         $mobileapp = new condition((object)['e' => condition::NOT_MOBILE_APP]);
         $this->assertTrue($mobileapp->is_available(false, $info, true, $USER->id));
     }
-
-    /**
-     * Test returning metadata.
-     * @coversDefaultClass availability_mobileapp\privacy\provider
-     */
-    public function test_get_metadata() {
-        $collection = new \core_privacy\local\metadata\collection('availability_mobileapp');
-        $reason = \availability_mobileapp\privacy\provider::get_reason($collection);
-        $this->assertEquals($reason, 'privacy:metadata');
-        $this->assertStringContainsString('does not store', get_string($reason, 'availability_mobileapp'));
-    }
 }
