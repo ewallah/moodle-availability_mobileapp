@@ -25,8 +25,6 @@
 
 namespace availability_mobileapp\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy API implementation for the Restriction by Mobile app access plugin.
  *

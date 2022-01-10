@@ -24,8 +24,6 @@
 
 namespace availability_mobileapp;
 
-defined('MOODLE_INTERNAL') || die();
-
 use availability_mobileapp\condition;
 
 /**
