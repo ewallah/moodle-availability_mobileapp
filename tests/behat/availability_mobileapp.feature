@@ -1,4 +1,4 @@
-@availability @availability_mobileapp
+@availability @availability_mobileapp @skip_chrome
 Feature: availability_mobileapp
   In order to control student access to activities
   As a teacher
