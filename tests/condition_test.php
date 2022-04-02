@@ -32,6 +32,7 @@ use availability_mobileapp\condition;
  * @package availability_mobileapp
  * @copyright availability_mobileapp
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @coversDefaultClass \availability_mobileapp
  */
 class condition_test extends \advanced_testcase {
     /**
@@ -45,6 +46,7 @@ class condition_test extends \advanced_testcase {
 
     /**
      * Tests constructing and using condition as part of tree.
+     * @covers \availability_mobileapp\condition
      */
     public function test_in_tree() {
         global $USER;
@@ -85,6 +87,7 @@ class condition_test extends \advanced_testcase {
     /**
      * Tests the constructor including error conditions. Also tests the
      * string conversion feature (intended for debugging only).
+     * @covers \availability_mobileapp\condition
      */
     public function test_constructor() {
         // No parameters.
@@ -107,6 +110,7 @@ class condition_test extends \advanced_testcase {
 
     /**
      * Tests the save() function.
+     * @covers \availability_mobileapp\condition
      */
     public function test_save() {
         $structure = (object)['e' => condition::MOBILE_APP];
@@ -117,6 +121,8 @@ class condition_test extends \advanced_testcase {
 
     /**
      * Tests the is_available and get_description functions.
+     * @covers \availability_mobileapp\condition
+     * @covers \availability_mobileapp\frontend
      */
     public function test_usage() {
         global $USER;
@@ -124,12 +130,37 @@ class condition_test extends \advanced_testcase {
 
         $generator = $this->getDataGenerator();
         $course = $generator->create_course();
+        $modinfo = get_fast_modinfo($course);
+        $sections = $modinfo->get_section_info_all();
         $info = new \core_availability\mock_info($course, $USER->id);
 
         $mobileapp = new condition((object)['e' => condition::MOBILE_APP]);
         $this->assertFalse($mobileapp->is_available(false, $info, true, $USER->id));
+        $this->assertFalse($mobileapp->is_available(false, $info, false, $USER->id));
+        $this->assertTrue($mobileapp->is_available(true, $info, true, $USER->id));
+        $this->assertTrue($mobileapp->is_available(true, $info, false, $USER->id));
+        $this->assertNotEmpty($mobileapp->get_description(true, true, $info));
+        $this->assertNotEmpty($mobileapp->get_description(false, true, $info));
+        $this->assertNotEmpty($mobileapp->get_description(true, false, $info));
+        $this->assertNotEmpty($mobileapp->get_description(false, false, $info));
 
         $mobileapp = new condition((object)['e' => condition::NOT_MOBILE_APP]);
         $this->assertTrue($mobileapp->is_available(false, $info, true, $USER->id));
+        $this->assertTrue($mobileapp->is_available(false, $info, false, $USER->id));
+        $this->assertFalse($mobileapp->is_available(true, $info, true, $USER->id));
+        $this->assertFalse($mobileapp->is_available(true, $info, false, $USER->id));
+        $this->assertNotEmpty($mobileapp->get_json(1));
+        $this->assertNotEmpty($mobileapp->get_description(true, true, $info));
+        $this->assertNotEmpty($mobileapp->get_description(false, true, $info));
+        $this->assertNotEmpty($mobileapp->get_description(true, false, $info));
+        $this->assertNotEmpty($mobileapp->get_description(false, false, $info));
+
+        $frontend = new frontend();
+        $name = 'availability_mobileapp\frontend';
+        $this->assertCount(3, \phpunit_util::call_internal_method($frontend, 'get_javascript_strings', [], $name));
+        $this->assertTrue(\phpunit_util::call_internal_method($frontend, 'allow_add', [$course], $name));
+        $this->assertTrue(\phpunit_util::call_internal_method($frontend, 'allow_add', [$course, null, $sections[0]], $name));
+        $this->assertTrue(\phpunit_util::call_internal_method($frontend, 'allow_add', [$course, null, $sections[1]], $name));
+
     }
 }
