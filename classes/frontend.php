@@ -62,7 +62,7 @@ class frontend extends \core_availability\frontend {
         // Rare case, the official service is disabled but the local_mobile services are enabled.
         $extraservice = $DB->get_record('external_services', array('shortname' => 'local_mobile', 'enabled' => 1));
 
-        if (!$mobileservice and !$extraservice) {
+        if (!$mobileservice && !$extraservice) {
             return false;
         }
 
