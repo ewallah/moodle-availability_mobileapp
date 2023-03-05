@@ -28,4 +28,4 @@ $plugin->version = 2021060200;
 $plugin->requires = 2016120500;
 $plugin->component = 'availability_mobileapp';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release  = '3.9';
+$plugin->release = '3.9';
