@@ -64,7 +64,7 @@ class condition_test extends \advanced_testcase {
         $structure = (object)[
             'op' => '|',
             'show' => true,
-            'c' => [(object)['type' => 'mobileapp', 'cm' => $cm->id, 'e' => condition::NOT_MOBILE_APP]]];
+            'c' => [(object)['type' => 'mobileapp', 'cm' => $cm->id, 'e' => condition::NOT_MOBILE_APP]], ];
         $tree = new \core_availability\tree($structure);
 
         // Check it's true.
@@ -75,7 +75,7 @@ class condition_test extends \advanced_testcase {
         $structure = (object)[
             'op' => '|',
             'show' => true,
-            'c' => [(object)['type' => 'mobileapp', 'cm' => $cm->id, 'e' => condition::MOBILE_APP]]];
+            'c' => [(object)['type' => 'mobileapp', 'cm' => $cm->id, 'e' => condition::MOBILE_APP]], ];
         $tree = new \core_availability\tree($structure);
 
         // Check it's false.

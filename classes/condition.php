@@ -64,7 +64,7 @@ class condition extends \core_availability\condition {
      * @return stdClass Structure object
      */
     public function save() {
-        return (object)array('type' => 'mobileapp', 'e' => $this->accesstype);
+        return (object)['type' => 'mobileapp', 'e' => $this->accesstype];
     }
 
     /**
@@ -77,7 +77,7 @@ class condition extends \core_availability\condition {
      * @return stdClass Object representing condition
      */
     public static function get_json($accesstype) {
-        return (object)array('type' => 'mobileapp', 'e' => (int)$accesstype);
+        return (object)['type' => 'mobileapp', 'e' => (int)$accesstype];
     }
 
 

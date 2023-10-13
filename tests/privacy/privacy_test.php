@@ -24,7 +24,7 @@
 
 namespace availability_mobileapp\privacy;
 
-use \core_privacy\tests\provider_testcase;
+use core_privacy\tests\provider_testcase;
 
 /**
  * Unit tests for the Mobile app condition.
