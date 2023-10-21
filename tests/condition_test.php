@@ -48,7 +48,7 @@ class condition_test extends \advanced_testcase {
      * Tests constructing and using condition as part of tree.
      * @covers \availability_mobileapp\condition
      */
-    public function test_in_tree() {
+    public function test_in_tree(): void {
         global $USER;
         $this->resetAfterTest();
         $this->setAdminUser();
@@ -89,7 +89,7 @@ class condition_test extends \advanced_testcase {
      * string conversion feature (intended for debugging only).
      * @covers \availability_mobileapp\condition
      */
-    public function test_constructor() {
+    public function test_constructor(): void {
         // No parameters.
         $structure = new \stdClass();
 
@@ -112,7 +112,7 @@ class condition_test extends \advanced_testcase {
      * Tests the save() function.
      * @covers \availability_mobileapp\condition
      */
-    public function test_save() {
+    public function test_save(): void {
         $structure = (object)['e' => condition::MOBILE_APP];
         $cond = new condition($structure);
         $structure->type = 'mobileapp';
@@ -124,7 +124,7 @@ class condition_test extends \advanced_testcase {
      * @covers \availability_mobileapp\condition
      * @covers \availability_mobileapp\frontend
      */
-    public function test_usage() {
+    public function test_usage(): void {
         global $USER;
         $this->resetAfterTest();
 

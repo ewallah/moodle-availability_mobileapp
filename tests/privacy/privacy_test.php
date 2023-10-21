@@ -40,7 +40,7 @@ class privacy_test extends provider_testcase {
      * Test returning metadata.
      * @covers \availability_mobileapp\privacy\provider
      */
-    public function test_get_metadata() {
+    public function test_get_metadata(): void {
         $collection = new \core_privacy\local\metadata\collection('availability_mobileapp');
         $reason = provider::get_reason($collection);
         $this->assertEquals($reason, 'privacy:metadata');
