@@ -125,7 +125,7 @@ class condition_test extends \advanced_testcase {
      * @covers \availability_mobileapp\frontend
      */
     public function test_usage(): void {
-        global $USER;
+        global $DB, $USER;
         $this->resetAfterTest();
 
         $generator = $this->getDataGenerator();
@@ -162,5 +162,11 @@ class condition_test extends \advanced_testcase {
         $this->assertTrue(\phpunit_util::call_internal_method($frontend, 'allow_add', [$course, null, $sections[0]], $name));
         $this->assertTrue(\phpunit_util::call_internal_method($frontend, 'allow_add', [$course, null, $sections[1]], $name));
 
+        $DB->set_field('external_services', 'enabled', 0, ['shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE]);
+        $DB->set_field('external_services', 'enabled', 0, ['shortname' => 'local_mobile']);
+        $this->assertFalse(\phpunit_util::call_internal_method($frontend, 'allow_add', [$course], $name));
+
+        set_config('enablewebservices', false);
+        $this->assertFalse(\phpunit_util::call_internal_method($frontend, 'allow_add', [$course], $name));
     }
 }
