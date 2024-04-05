@@ -32,7 +32,6 @@ namespace availability_mobileapp;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class frontend extends \core_availability\frontend {
-
     /**
      * Gets a list of string identifiers that are required in JavaScript for this plugin.
      *

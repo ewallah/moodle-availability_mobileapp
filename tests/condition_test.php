@@ -81,7 +81,6 @@ final class condition_test extends \advanced_testcase {
         // Check it's false.
         $result = $tree->check_available(false, $info, true, $USER->id);
         $this->assertFalse($result->is_available());
-
     }
 
     /**

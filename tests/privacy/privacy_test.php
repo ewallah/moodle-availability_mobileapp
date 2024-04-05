@@ -35,7 +35,6 @@ use core_privacy\tests\provider_testcase;
  * @coversDefaultClass \availability_mobileapp\privacy\provider
  */
 final class privacy_test extends provider_testcase {
-
     /**
      * Test returning metadata.
      * @covers \availability_mobileapp\privacy\provider

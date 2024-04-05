@@ -32,7 +32,6 @@ namespace availability_mobileapp;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class condition extends \core_availability\condition {
-
     /**  @var int Mobile app access */
     const MOBILE_APP = 1;
 
@@ -164,5 +163,4 @@ class condition extends \core_availability\condition {
 
         return get_string($str, 'availability_mobileapp');
     }
-
 }
