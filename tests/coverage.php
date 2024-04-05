@@ -24,6 +24,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Unit tests for the mobileapp condition.
+ *
+ * @package   availability_mobileapp
+ * @copyright 2021 Renaat Debleu <info@eWallah.net>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 return new class extends phpunit_coverage_info {
     /** @var array The list of folders relative to the plugin root to include in coverage generation. */
     protected $includelistfolders = ['classes'];
