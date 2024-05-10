@@ -18,7 +18,8 @@
  * Unit tests for the mobileapp condition.
  *
  * @package   availability_mobileapp
- * @copyright 2021 Renaat Debleu <info@eWallah.net>
+ * @copyright eWallah (www.eWallah.net)
+ * @author    Renaat Debleu <info@eWallah.net>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +29,8 @@ defined('MOODLE_INTERNAL') || die();
  * Unit tests for the mobileapp condition.
  *
  * @package   availability_mobileapp
- * @copyright 2021 Renaat Debleu <info@eWallah.net>
+ * @copyright eWallah (www.eWallah.net)
+ * @author    Renaat Debleu <info@eWallah.net>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 return new class extends phpunit_coverage_info {
