@@ -48,9 +48,9 @@ class frontend extends \core_availability\frontend {
     /**
      * Decides whether this plugin should be available in a given course.
      *
-     * @param \stdClass $course Course object
-     * @param \cm_info|null $cm Course-module currently being edited (null if none)
-     * @param \section_info|null $section Section currently being edited (null if none)
+     * @param stdClass $course Course object
+     * @param cm_info|null $cm Course-module currently being edited (null if none)
+     * @param section_info|null $section Section currently being edited (null if none)
      */
     protected function allow_add($course, ?cm_info $cm = null, ?section_info $section = null) {
         global $CFG, $DB;
