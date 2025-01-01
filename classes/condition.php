@@ -96,6 +96,11 @@ class condition extends \core_availability\condition {
     protected function is_ws_access() {
         global $ME;
 
+        // Do not continue if $ME is empty and we cannot do URL checks.
+        if (empty($ME)) {
+            return false;
+        }
+
         // First check this global const.
         if (WS_SERVER) {
             return true;
