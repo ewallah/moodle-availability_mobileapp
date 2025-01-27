@@ -32,7 +32,7 @@ use availability_mobileapp\condition;
  * @package availability_mobileapp
  * @copyright availability_mobileapp
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @coversDefaultClass \availability_mobileapp
+ * @coversDefaultClass \availability_mobileapp)]
  */
 final class condition_test extends \advanced_testcase {
     /**
@@ -47,7 +47,7 @@ final class condition_test extends \advanced_testcase {
 
     /**
      * Tests constructing and using condition as part of tree.
-     * @covers \availability_mobileapp\condition
+     * #[CoversClass(availability_mobileapp\condition)]
      */
     public function test_in_tree(): void {
         global $USER;
@@ -87,7 +87,7 @@ final class condition_test extends \advanced_testcase {
     /**
      * Tests the constructor including error conditions. Also tests the
      * string conversion feature (intended for debugging only).
-     * @covers \availability_mobileapp\condition
+     * #[CoversClass(availability_mobileapp\condition)]
      */
     public function test_constructor(): void {
         // No parameters.
@@ -110,7 +110,7 @@ final class condition_test extends \advanced_testcase {
 
     /**
      * Tests the save() function.
-     * @covers \availability_mobileapp\condition
+     * #[CoversClass(availability_mobileapp\condition)]
      */
     public function test_save(): void {
         $structure = (object)['e' => condition::MOBILE_APP];
@@ -121,8 +121,8 @@ final class condition_test extends \advanced_testcase {
 
     /**
      * Tests the is_available and get_description functions.
-     * @covers \availability_mobileapp\condition
-     * @covers \availability_mobileapp\frontend
+     * #[CoversClass(availability_mobileapp\condition)]
+     * #[CoversClass(availability_mobileapp\frontend)]
      */
     public function test_usage(): void {
         global $DB, $USER;
