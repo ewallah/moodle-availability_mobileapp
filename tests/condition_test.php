@@ -32,7 +32,7 @@ use availability_mobileapp\condition;
  * @package availability_mobileapp
  * @copyright availability_mobileapp
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @coversDefaultClass \availability_mobileapp)]
+ * #[CoversClass(availability_mobileapp)]
  */
 final class condition_test extends \advanced_testcase {
     /**
