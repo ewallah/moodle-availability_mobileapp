@@ -32,12 +32,11 @@ use core_privacy\tests\provider_testcase;
  * @package availability_mobileapp
  * @copyright availability_mobileapp
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * #[CoversClass(availability_mobileapp\privacy\provider)]
  */
 final class privacy_test extends provider_testcase {
     /**
      * Test returning metadata.
-     * #[CoversClass(availability_mobileapp\privacy\provider)]
+     * @covers \availability_mobileapp\privacy\provider
      */
     public function test_get_metadata(): void {
         $collection = new \core_privacy\local\metadata\collection('availability_mobileapp');
