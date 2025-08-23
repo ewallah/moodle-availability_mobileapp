@@ -25,9 +25,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 
-$plugin->requires = 2024100700;
 $plugin->component = 'availability_mobileapp';
 $plugin->maturity = MATURITY_STABLE;
+$plugin->release = 'v5.0.2';
+$plugin->version = 2025082300;
+$plugin->requires = 2024100700;
 $plugin->supported = [405, 500];
-$plugin->release = 'v5.0.1';
-$plugin->version = 2025043000;
