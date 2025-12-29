@@ -107,7 +107,7 @@ class condition extends \core_availability\condition {
         }
 
         // Check rare cases, like webservice/pluginfile.php.
-        if (strpos($ME ?? '', "webservice/") !== false || strpos($ME ?? '', "tokenpluginfile.php") !== false) {
+        if (str_contains($ME ?? '', "webservice/") || str_contains($ME ?? '', "tokenpluginfile.php")) {
             $token = optional_param('token', '', PARAM_ALPHANUM);
             if ($token) {
                 return true;
@@ -140,7 +140,7 @@ class condition extends \core_availability\condition {
         }
 
         if ($not) {
-            $allow = !$allow;
+            return !$allow;
         }
 
         return $allow;
@@ -156,14 +156,10 @@ class condition extends \core_availability\condition {
      */
     public function get_description($full, $not, \core_availability\info $info) {
 
-        if ($this->accesstype == self::MOBILE_APP) {
-            $str = 'requires_app';
-        } else {
-            $str = 'requires_notapp';
-        }
+        $str = $this->accesstype == self::MOBILE_APP ? 'requires_app' : 'requires_notapp';
 
         if ($not) {
-            $str = ($str == 'requires_app') ? 'requires_notapp' : 'requires_app';
+            $str = ($str === 'requires_app') ? 'requires_notapp' : 'requires_app';
         }
 
         return get_string($str, 'availability_mobileapp');

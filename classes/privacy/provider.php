@@ -34,8 +34,6 @@ namespace availability_mobileapp\privacy;
 class provider implements \core_privacy\local\metadata\null_provider {
     /**
      * Returns stringid of a text explaining that this plugin stores no personal data.
-     *
-     * @return string
      */
     public static function get_reason(): string {
         return 'privacy:metadata';

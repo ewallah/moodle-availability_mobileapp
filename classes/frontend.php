@@ -64,11 +64,6 @@ class frontend extends \core_availability\frontend {
         $mobileservice = $DB->get_record('external_services', ['shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE, 'enabled' => 1]);
         // Rare case, the official service is disabled but the local_mobile services are enabled.
         $extraservice = $DB->get_record('external_services', ['shortname' => 'local_mobile', 'enabled' => 1]);
-
-        if (!$mobileservice && !$extraservice) {
-            return false;
-        }
-
-        return true;
+        return !(!$mobileservice && !$extraservice);
     }
 }

@@ -94,6 +94,7 @@ final class condition_test extends \advanced_testcase {
 
         // Successful construct & display with all different expected values.
         $structure->e = condition::NOT_MOBILE_APP;
+
         $cond = new condition($structure);
         $this->assertEquals('{mobileapp:#2}', (string)$cond);
 
