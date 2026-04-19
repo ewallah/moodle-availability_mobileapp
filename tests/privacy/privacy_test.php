@@ -25,6 +25,7 @@
 namespace availability_mobileapp\privacy;
 
 use core_privacy\tests\provider_testcase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Unit tests for the Mobile app condition.
@@ -33,10 +34,10 @@ use core_privacy\tests\provider_testcase;
  * @copyright availability_mobileapp
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+#[CoversClass(provider::class)]
 final class privacy_test extends provider_testcase {
     /**
      * Test returning metadata.
-     * @covers \availability_mobileapp\privacy\provider
      */
     public function test_get_metadata(): void {
         $reason = provider::get_reason();

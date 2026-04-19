@@ -25,6 +25,7 @@
 namespace availability_mobileapp;
 
 use availability_mobileapp\condition;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Unit tests for the Mobile app condition.
@@ -33,6 +34,8 @@ use availability_mobileapp\condition;
  * @copyright availability_mobileapp
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+#[CoversClass(condition::class)]
+#[CoversClass(frontend::class)]
 final class condition_test extends \advanced_testcase {
     /**
      * Load required classes.
@@ -46,7 +49,6 @@ final class condition_test extends \advanced_testcase {
 
     /**
      * Tests constructing and using condition as part of tree.
-     * @covers \availability_mobileapp\condition
      */
     public function test_in_tree(): void {
         global $USER;
@@ -86,7 +88,6 @@ final class condition_test extends \advanced_testcase {
     /**
      * Tests the constructor including error conditions. Also tests the
      * string conversion feature (intended for debugging only).
-     * @covers \availability_mobileapp\condition
      */
     public function test_constructor(): void {
         // No parameters.
@@ -110,7 +111,6 @@ final class condition_test extends \advanced_testcase {
 
     /**
      * Tests the save() function.
-     * @covers \availability_mobileapp\condition
      */
     public function test_save(): void {
         $structure = (object)['e' => condition::MOBILE_APP];
@@ -121,8 +121,6 @@ final class condition_test extends \advanced_testcase {
 
     /**
      * Tests the is_available and get_description functions.
-     * @covers \availability_mobileapp\condition
-     * @covers \availability_mobileapp\frontend
      */
     public function test_usage(): void {
         global $DB, $USER;
